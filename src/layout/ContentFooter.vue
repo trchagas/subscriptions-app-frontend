@@ -1,18 +1,7 @@
 <template>
   <footer class="footer px-4">
     <div class="row align-items-center justify-content-lg-between px-1">
-      <div class="col-lg">
-        <div class="copyright text-center text-lg-right text-muted">
-          © {{ year }}
-          Powered by
-          <a
-            href="https://starsaceleradora.com.br/"
-            class="font-weight-bold text-orange"
-            target="_blank"
-            >Stars/Azaz</a
-          >
-        </div>
-      </div>
+      <div class="col-lg"></div>
     </div>
     <base-button
       v-if="this.$props.externalChatUrl"
@@ -49,16 +38,16 @@ export default {
   props: {
     showSocial: {
       type: Boolean,
-      default: true,
+      default: true
     },
     externalChatUrl: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
       year: new Date().getFullYear(),
-      showExternalChat: false,
+      showExternalChat: false
     };
   },
   methods: {
@@ -74,8 +63,8 @@ export default {
       refIframe.style.height = window.innerHeight + "px";
       this.showExternalChat = true;
       document.body.style.overflow = "hidden";
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="{ [`bg-orquestrando`]: type }">
+  <div class="header" :class="{ [`bg-default`]: type }">
     <div class="container-fluid">
       <div class="header-body">
         <slot />
@@ -14,9 +14,9 @@ export default {
     type: {
       type: String,
       default: "primary",
-      description: "Header background type",
-    },
-  },
+      description: "Header background type"
+    }
+  }
 };
 </script>
 <style>

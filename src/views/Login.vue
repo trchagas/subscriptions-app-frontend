@@ -6,11 +6,8 @@
         class="card bg-secondary shadow border-0 vld-parent"
       >
         <div class="card-header bg-transparent pb-4 pt-4">
-          <img
-            class="mx-auto d-block img-fluid"
-            width="50%"
-            :src="defaultLogo"
-          />
+          <h1 class="text-center">Subscriptions App</h1>
+          <p class="text-center">Entrar</p>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
@@ -32,9 +29,6 @@
               addon-left-icon="ni ni-lock-circle-open"
             />
 
-            <base-checkbox class="custom-control-alternative text-right mr-1">
-              <span class="text-muted ml--3">Lembrar-me</span>
-            </base-checkbox>
             <base-alert
               v-if="error"
               type="danger"
@@ -59,8 +53,8 @@
       </div>
       <div class="row mt-3">
         <div class="col-12">
-          <router-link to="/forgot-password" class="text-light float-right">
-            <small> Esqueceu sua senha? </small>
+          <router-link to="/register" class="text-light float-right">
+            <small> Não possui uma conta? </small>
           </router-link>
         </div>
       </div>
@@ -77,20 +71,12 @@ export default {
     return {
       model: {
         email: "",
-        password: "",
+        password: ""
       },
-      error: "",
+      error: ""
     };
   },
-  computed: {
-    defaultLogo() {
-      return `/img/brand/${
-        window.location.host.includes("cobusiness")
-          ? "cobusiness.png"
-          : "orquestrando_logo.png"
-      }`;
-    },
-  },
+
   methods: {
     async handleSignIn(e) {
       e.preventDefault();
@@ -102,18 +88,14 @@ export default {
         let loader = this.$loading.show({
           container: this.$refs.formContainer,
           width: 128,
-          height: 128,
+          height: 128
         });
         try {
           const { data } = await api.post("/sessions", user);
-          login(data.auth.token, data.roles);
+          login(data.user.token, data.roles);
           const rolesMap = {
             admin: "diretoria",
-            student: "aluno",
-            teacher: "professor",
-            partner: "parceiro",
-            associate: "associado",
-            volunteer: "voluntario",
+            client: "cliente"
           };
           this.$router.push(`/${rolesMap[data.roles[0]]}`);
           this.$toasted.show("Bem-vindo! :)");
@@ -125,8 +107,8 @@ export default {
           loader.hide();
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped></style>

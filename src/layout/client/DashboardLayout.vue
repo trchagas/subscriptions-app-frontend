@@ -5,7 +5,7 @@
       short-title="Client"
       title="Dashboard Client"
       :display-sidebar="displaySidebar"
-      :user-logo="admin.profile_picture ? admin.profile_picture.url : ''"
+      :user-logo="client.profile_picture ? client.profile_picture.url : ''"
     >
       <template slot="links">
         <!-- menu links -->

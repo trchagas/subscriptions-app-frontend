@@ -11,7 +11,7 @@
         <span class="navbar-toggler-icon" />
       </navbar-toggle-button>
       <router-link class="navbar-brand img-container" to="/">
-        <img :src="defaultLogo" class="navbar-brand-img" alt="Logo" />
+        <h1>Subscriptions App</h1>
         <br />
       </router-link>
       <slot name="mobile-right">
@@ -86,35 +86,35 @@ import { logout, getRoles } from "@/services/auth";
 export default {
   name: "Sidebar",
   components: {
-    NavbarToggleButton,
+    NavbarToggleButton
   },
   props: {
     logo: {
       type: String,
       default: "/img/brand/orquestrando_logo.png",
-      description: "Sidebar app logo",
+      description: "Sidebar app logo"
     },
     isUser: {
       type: Boolean,
-      default: true,
+      default: true
     },
     autoClose: {
       type: Boolean,
       default: true,
       description:
-        "Whether sidebar should autoclose on mobile when clicking an item",
+        "Whether sidebar should autoclose on mobile when clicking an item"
     },
     displaySidebar: {
       type: Boolean,
-      default: true,
+      default: true
     },
     userLogo: {
-      type: String,
-    },
+      type: String
+    }
   },
   provide() {
     return {
-      autoClose: this.autoClose,
+      autoClose: this.autoClose
     };
   },
   computed: {
@@ -123,7 +123,7 @@ export default {
     },
     defaultLogo() {
       return this.logo;
-    },
+    }
   },
   beforeDestroy() {
     if (this.$sidebar.showSidebar) {
@@ -139,7 +139,7 @@ export default {
         teacher: "professor",
         partner: "parceiro",
         associate: "associado",
-        volunteer: "voluntario",
+        volunteer: "voluntario"
       };
       if (roles) {
         const role = JSON.parse(roles)[0];
@@ -160,8 +160,8 @@ export default {
     },
     toggleSidebar() {
       this.displaySidebar = !this.displaySidebar;
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

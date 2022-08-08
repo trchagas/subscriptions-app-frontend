@@ -1,6 +1,6 @@
 {
-  "name": "Orquestrando Arte",
-  "short_name": "OARTE",
+  "name": "Subscriptions App",
+  "short_name": "SAPP",
   "icons": [
     {
       "src": "./img/icons/android-chrome-36x36.png",
@@ -41,5 +41,5 @@
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#c95fa7"
+  "theme_color": "#172b4d"
 }
