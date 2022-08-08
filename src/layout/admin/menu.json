@@ -1,0 +1,66 @@
+{
+  "links": [
+    {
+      "name": "Início",
+      "icon": "ni ni-tv-2 text-purple",
+      "path": "/diretoria/inicio"
+    },
+    {
+      "name": "Murais",
+      "id": "v-step-4",
+      "icon": "fas fa-newspaper text-warning",
+      "path": "/diretoria/murais"
+    },
+    {
+      "name": "Projetos",
+      "id": "v-step-4",
+      "icon": "fas fa-project-diagram text-red",
+      "path": "/diretoria/projetos"
+    },
+    {
+      "name": "Usuários",
+      "icon": "fas fa-users text-default",
+      "path": "/diretoria/usuarios"
+    },
+    {
+      "name": "Turmas",
+      "icon": "fas fa-graduation-cap text-primary",
+      "path": "/diretoria/turmas/professores"
+    },
+    {
+      "name": "Reuniões",
+      "icon": "far fa-calendar-check text-black",
+      "path": "/diretoria/reunioes"
+    },
+    {
+      "name": "Mensalidades",
+      "icon": "ni ni-money-coins text-success",
+      "path": "/diretoria/mensalidades"
+    },
+    {
+      "name": "Questionários",
+      "icon": "fas fa-clipboard-list text-dark-yellow",
+      "path": "/diretoria/questionarios"
+    },
+    {
+      "name": "Atendimentos",
+      "icon": "fas fa-comments text-black",
+      "path": "/diretoria/atendimentos"
+    },
+    {
+      "name": "Vitrine de parceiros",
+      "icon": "fas fa-handshake text-primary",
+      "path": "/diretoria/parceiros"
+    },
+    {
+      "name": "Agenda",
+      "icon": "fas fa-calendar-day text-pink",
+      "path": "/diretoria/agenda"
+    },
+    {
+      "name": "Configurações",
+      "icon": "ni ni-settings text-info",
+      "path": "/diretoria/configuracoes"
+    }
+  ]
+}

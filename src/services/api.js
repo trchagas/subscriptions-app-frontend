@@ -1,7 +1,20 @@
-import axios from 'axios'
+import axios from "axios";
+import { getToken } from "./auth";
+
+const isProd = process.env.NODE_ENV === "production";
+
+const apiUrl = isProd
+  ? "https://preview.portalhubinovacao.com.br/api-cobusiness"
+  : "http://127.0.0.1:3333";
 
 const api = axios.create({
-  baseURL: 'http://192.168.0.12:3333/',
-})
+  baseURL: apiUrl,
+});
 
-export default api
+api.interceptors.request.use(async (config) => {
+  const token = getToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
+
+export default api;

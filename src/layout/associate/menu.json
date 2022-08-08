@@ -1,0 +1,41 @@
+{
+  "links": [
+    {
+      "name": "Início",
+      "icon": "ni ni-tv-2 text-purple",
+      "path": "/associado/inicio"
+    },
+    {
+      "name": "Murais",
+      "id": "v-step-4",
+      "icon": "fas fa-newspaper text-warning",
+      "path": "/associado/murais"
+    },
+
+    {
+      "name": "Mensalidades",
+      "icon": "ni ni-money-coins text-success",
+      "path": "/associado/mensalidades"
+    },
+    {
+      "name": "Reuniões",
+      "icon": "far fa-calendar-check text-black",
+      "path": "/associado/reunioes"
+    },
+    {
+      "name": "Questionários",
+      "icon": "fas fa-clipboard-list text-dark-yellow",
+      "path": "/associado/questionarios"
+    },
+    {
+      "name": "Agenda",
+      "icon": "fas fa-calendar-day text-pink",
+      "path": "/associado/agenda"
+    },
+    {
+      "name": "Configurações",
+      "icon": "ni ni-settings text-info",
+      "path": "/associado/configuracoes"
+    }
+  ]
+}

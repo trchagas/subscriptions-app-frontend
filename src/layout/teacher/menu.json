@@ -1,0 +1,46 @@
+{
+  "links": [
+    {
+      "name": "Início",
+      "icon": "ni ni-tv-2 text-purple",
+      "path": "/professor/inicio"
+    },
+    {
+      "name": "Murais",
+      "id": "v-step-4",
+      "icon": "fas fa-newspaper text-warning",
+      "path": "/professor/murais"
+    },
+    {
+      "name": "Projetos",
+      "id": "v-step-4",
+      "icon": "fas fa-project-diagram text-red",
+      "path": "/professor/projetos"
+    },
+    {
+      "name": "Turmas",
+      "icon": "fas fa-chalkboard-teacher text-primary",
+      "path": "/professor/turmas"
+    },
+    {
+      "name": "Reuniões",
+      "icon": "far fa-calendar-check text-black",
+      "path": "/professor/reunioes"
+    },
+    {
+      "name": "Questionários",
+      "icon": "fas fa-clipboard-list text-dark-yellow",
+      "path": "/professor/questionarios"
+    },
+    {
+      "name": "Agenda",
+      "icon": "fas fa-calendar-day text-pink",
+      "path": "/professor/agenda"
+    },
+    {
+      "name": "Configurações",
+      "icon": "ni ni-settings text-info",
+      "path": "/professor/configuracoes"
+    }
+  ]
+}
