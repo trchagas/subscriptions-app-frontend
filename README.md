@@ -27,5 +27,5 @@
 ## Listagem de inscrições:
 ![print2](https://user-images.githubusercontent.com/49379007/183553375-8a1309c3-779f-4393-8a58-26d0a8783360.png)
 
-## Edição de inscrições:
+## Edição de inscrição:
 ![print3](https://user-images.githubusercontent.com/49379007/183553407-c3a56aa1-96e4-40d3-88c7-25c95689609b.png)
