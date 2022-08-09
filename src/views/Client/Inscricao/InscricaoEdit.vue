@@ -21,10 +21,15 @@
           <card shadow type="secondary" class="col-sm-12 col-xl-5">
             <div slot="header" class="bg-white border-0">
               <div class="row align-items-center">
-                <div class="col-12">
+                <div class="col-12 d-flex justify-content-between">
                   <h3 class="mb-0 text-center">
-                    <i class="fas fa-edit mr-2" /> Nova inscrição
+                    <i class="fas fa-edit mr-2" /> Editar inscrição
                   </h3>
+                  <i
+                    v-tooltip="'Excluir inscrição'"
+                    class="btn btn-danger py-1 px-2 far fa-trash-alt"
+                    @click="handleDeleteSubscription()"
+                  ></i>
                 </div>
               </div>
             </div>
@@ -259,6 +264,17 @@ export default {
       if (typeof event === "boolean") this.model[attribute] = event;
     },
 
+    async handleDeleteSubscription() {
+      try {
+        await api.delete(`/client/subscriptions/${this.$route.params.id}`);
+
+        this.$toasted.show("Inscrição excluída com sucesso");
+        this.$router.push("/cliente");
+      } catch (e) {
+        this.$toasted.error("Ocorreu um erro ao excluir a inscrição");
+      }
+    },
+
     async handleSubmit(e) {
       e.preventDefault();
       const loader = this.$loading.show({
@@ -289,7 +305,6 @@ export default {
         this.$toasted.show("Inscrição editada com sucesso");
         this.$router.push("/cliente");
       } catch (e) {
-        console.log(e);
         const genericError = "Ocorreu um erro ao editar a inscrição.";
         const hasErrorResponseData = e.response && e.response.data;
         let customError = genericError;

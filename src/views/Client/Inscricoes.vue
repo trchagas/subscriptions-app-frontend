@@ -64,8 +64,9 @@
                 <div class="card">
                   <div class="card-body d-flex justify-content-between">
                     <div class="">
-                      <h2 class="card-title">{{ subscription.name }}</h2>
-
+                      <div>
+                        <h2 class="card-title">{{ subscription.name }}</h2>
+                      </div>
                       <!-- <a
                         href="#"
                         class="btn btn-default edit-button"
