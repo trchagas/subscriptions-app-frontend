@@ -34,9 +34,9 @@
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
-                    <label class="form-control-label">Nome</label>
+                    <label class="form-control-label">Nome*</label>
                     <base-input
-                      v-model.trim="model.user.email"
+                      v-model.trim="model.name"
                       placeholder="Insira o nome"
                     />
                   </div>
@@ -46,7 +46,7 @@
                   >
                     <label class="form-control-label">Descrição</label>
                     <base-input
-                      v-model="model.user.description"
+                      v-model="model.description"
                       placeholder="Insira a descrição"
                     />
                   </div>
@@ -54,10 +54,10 @@
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
-                    <label class="form-control-label">Preço</label>
+                    <label class="form-control-label">Preço*</label>
 
                     <base-input
-                      v-model="model.user.price"
+                      v-model="model.price"
                       placeholder="Insira o preço"
                       v-mask="[
                         'R$##.##',
@@ -71,35 +71,90 @@
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
-                    <label class="form-control-label">Próxima cobrança</label>
-                    <base-input
-                      v-model="model.user.next_bill"
-                      placeholder="Insira a data de cobrança"
-                    />
+                    <label class="form-control-label">Categoria*</label>
+                    <select
+                      v-model="model.category"
+                      class="form-control mb-4 select-input"
+                    >
+                      <option value="" selected disabled>
+                        Selecione uma opção
+                      </option>
+                      <option key="music" value="music">Música</option>
+                      <option key="entertainment" value="entertainment">
+                        Entretenimento
+                      </option>
+                      <option key="utilities" value="utilities">
+                        Utilidades
+                      </option>
+                      <option
+                        key="food_and_beverages"
+                        value="food_and_beverages"
+                      >
+                        Alimentação
+                      </option>
+                      <option
+                        key="health_and_wellbeing"
+                        value="health_and_wellbeing"
+                      >
+                        Saúde e Bem Estar
+                      </option>
+                      <option key="productivity" value="productivity">
+                        Produtividade
+                      </option>
+                      <option key="banking" value="banking">Banco</option>
+                      <option key="transport" value="transport">
+                        Transporte
+                      </option>
+                      <option key="education" value="education">
+                        Educação
+                      </option>
+                      <option key="insurance" value="insurance">
+                        Segurança
+                      </option>
+                    </select>
                   </div>
+
                   <hr class="mt--3 mb-2" />
+
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
-                    <label class="form-control-label">Ciclo (meses)</label>
-                    <base-input
-                      v-model="model.user.billing_cycle"
-                      placeholder="Insira o ciclo em meses"
-                      type="number"
+                    <label class="form-control-label">Próxima cobrança</label>
+
+                    <input
+                      class="no-border form-control mb-4 select-input"
+                      :min="today"
+                      type="date"
+                      v-model="model.next_bill"
                     />
                   </div>
                   <hr class="mt--3 mb-2" />
+
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
                     <label class="form-control-label">É contínua?</label>
                     <base-switch
                       class="mb-switch"
-                      v-bind:value="model.user.is_continuous"
+                      v-bind:value="model.is_continuous"
                       @input="switchChangedHandler($event, 'is_continuous')"
                     />
                   </div>
                   <hr class="mt--3 mb-2" />
+
+                  <div
+                    v-if="model.is_continuous"
+                    class="col-12 d-flex flex-row align-items-center justify-content-between"
+                  >
+                    <label class="form-control-label">Ciclo (meses)</label>
+                    <base-input
+                      v-model="model.billing_cycle"
+                      placeholder="Insira o ciclo em meses"
+                      type="number"
+                    />
+                  </div>
+                  <hr v-if="model.is_continuous" class="mt--3 mb-2" />
+
                   <div
                     class="col-12 d-flex flex-row align-items-center justify-content-between"
                   >
@@ -107,7 +162,7 @@
 
                     <base-switch
                       class="mb-switch"
-                      v-bind:value="model.user.is_active"
+                      v-bind:value="model.is_active"
                       @input="switchChangedHandler($event, 'is_active')"
                     />
                   </div>
@@ -121,13 +176,13 @@
                     </base-alert>
                   </div>
                 </div>
-                <div class="text-right">
+                <div class="text-center">
                   <base-button
                     type="default"
                     class="mt-4"
                     :custom="true"
                     :disabled="!isValidModel"
-                    @click="handleOpenModalConfirmation"
+                    @click="handleSubmit"
                   >
                     Salvar
                   </base-button>
@@ -138,52 +193,6 @@
         </div>
       </div>
     </div>
-    <modal
-      :show.sync="modals.modalConfirmation"
-      modal-classes="modal-default modal-dialog-centered"
-    >
-      <h6 id="modal-title-notification" slot="header" class="modal-title">
-        Atenção!
-      </h6>
-      <div ref="modal_confirmation" class="vld-parent">
-        <div class="py-3 text-center">
-          <i class="fa fa-user-shield fa-3x" />
-          <h4 class="heading mt-4">Confirmar criação</h4>
-          <p class="mt-3 mb-0">
-            O usuário terá acesso a todas as funcionalidades do perfil de
-            <span class="font-weight-bold">parceiro</span> do portal.
-          </p>
-          <p class="mt-3">
-            Por favor, digite
-            <span class="font-weight-bold">{{ model.user.email }}</span>
-            para prosseguir
-          </p>
-          <base-input
-            v-model="modals.inputConfirmation"
-            placeholder="Digite aqui"
-            input-classes="form-control"
-            addon-left-icon="fas fa-envelope"
-          />
-        </div>
-      </div>
-      <template slot="footer">
-        <base-button
-          type="link"
-          text-color="white"
-          class="ml-auto"
-          @click="modals.modalConfirmation = false"
-        >
-          Voltar
-        </base-button>
-        <base-button
-          type="white text-success"
-          :disabled="!inputConfirmationTextIsValid()"
-          @click="handleSubmitNewParceiro"
-        >
-          Confirmar criação
-        </base-button>
-      </template>
-    </modal>
   </div>
 </template>
 
@@ -191,72 +200,48 @@
 import api from "../../../services/api";
 
 export default {
-  name: "AdminCriarParceiroes",
+  name: "InscricaoForm",
   data() {
     return {
       model: {
-        user: {
-          email: "",
-          password: ""
-        },
-        parceiro: {
-          partner_id: "",
-          name: "",
-          cnpj: "",
-          phone: "",
-          start_at: null,
-          note: null
-        }
+        name: "",
+        description: "",
+        price: "",
+        category: "",
+        next_bill: "",
+        billing_cycle: "",
+        is_continuous: false,
+        is_active: false
       },
+      today: "",
       modals: {
         modalConfirmation: false,
         inputConfirmation: ""
       },
       error: "",
-      requiredFields: ["name", "phone"],
+      requiredFields: ["name", "price", "category"],
       showComplementarInfo: true
     };
   },
+
+  mounted() {
+    this.today = this.formatDate(new Date(), "YYYY-MM-DD");
+  },
   computed: {
     isValidModel() {
-      const user = this.model.user;
-      if (!user.email || !user.password) return false;
-      const parceiro = this.model.parceiro;
+      const sub = this.model;
       for (const key of this.requiredFields) {
-        if (parceiro[key] === "") return false;
+        if (sub[key] === "") return false;
       }
       return true;
-    },
-    passwordStatus() {
-      const status = {
-        strong: {
-          class: "text-success",
-          message: "forte"
-        },
-        average: {
-          class: "text-warning",
-          message: "média"
-        },
-        weak: {
-          class: "text-danger",
-          message: "fraca"
-        }
-      };
-      const length = this.model.user.password.length;
-      const status_type =
-        length < 6 ? status.weak : length < 10 ? status.average : status.strong;
-      return status_type;
     }
   },
   methods: {
-    inputConfirmationTextIsValid() {
-      return this.modals.inputConfirmation === this.model.user.email;
+    switchChangedHandler(event, attribute) {
+      if (typeof event === "boolean") this.model[attribute] = event;
     },
-    handleOpenModalConfirmation() {
-      this.modals.inputConfirmation = "";
-      this.modals.modalConfirmation = true;
-    },
-    async handleSubmitNewParceiro(e) {
+
+    async handleSubmit(e) {
       e.preventDefault();
       const loader = this.$loading.show({
         container: this.$refs.modal_confirmation,
@@ -264,18 +249,27 @@ export default {
         height: 90,
         opacity: 0
       });
+
       this.error = "";
-      const parceiro = this.model.parceiro;
+      this.model.billing_cycle = this.model.is_continuous
+        ? this.model.billing_cycle
+        : 0;
+
+      this.model.price = parseFloat(
+        this.model.price
+          .substring(2, this.model.price.length)
+          .replaceAll(",", ".")
+      );
+      const subscription = this.model;
+
       try {
-        await api.post("/admin/partners", {
-          ...this.model.user,
-          password_confirmation: this.model.user.password,
-          ...parceiro
+        await api.post("/client/subscriptions", {
+          data: subscription
         });
-        this.$toasted.show("Novo parceiro cadastradro com sucesso");
-        this.$router.push("/diretoria/usuarios/parceiros");
+        this.$toasted.show("Inscrição cadastrada com sucesso");
+        this.$router.push("/cliente");
       } catch (e) {
-        const genericError = "Ocorreu um erro ao cadastrar o parceiro.";
+        const genericError = "Ocorreu um erro ao cadastrar a inscrição.";
         const hasErrorResponseData = e.response && e.response.data;
         let customError = genericError;
         if (hasErrorResponseData) {
@@ -297,5 +291,9 @@ export default {
 .mb-switch {
   margin-top: 10px;
   margin-bottom: 30px;
+}
+
+.select-input {
+  width: 208px;
 }
 </style>
